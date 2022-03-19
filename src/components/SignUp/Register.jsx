@@ -21,7 +21,6 @@ const Register = (props) => {
     const info = await UserService.register({ address: account.address })
 
     await login(info.nonce)
-    console.log('account', account);
     await UserService.setPersonalData({ ...data, ...account })
   }
 

@@ -8,6 +8,7 @@ import Sign from '../containers/Sign/Sign';
 import Dashboard from '../containers/Dashboard/Dashboard';
 import Register from './SignUp/Register';
 import Spinner from './common/Spinner/Spinner';
+import ProjectDetails from './ProjectDetails/ProjectDetails';
 
 const RouteOptions = {
   BECOME_CREATOR: 'BECOME_CREATOR',
@@ -25,6 +26,7 @@ const Router = (props) => {
 
   const defaultRoutes = (
     <>
+      <Route path="/project/details" element={<ProjectDetails />} />
       <Route path="/" element={<Dashboard />} />
       <Route path="*" element={<Navigate to='/' />} />
     </>

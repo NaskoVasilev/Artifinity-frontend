@@ -27,7 +27,6 @@ export const walletStore = {
         }
     }),
     setAccount: action((state, payload) => {
-        console.log('payload', payload);
         state.account = payload;
     }),
     setWalletConnectionLoading: action((state, payload) => {
@@ -43,7 +42,6 @@ export const walletStore = {
         if (!getState().isWalletConnected) {
             const data = await UserService.getUserInfo(payload)
             if (data) {
-                console.log('store', getStoreActions());
                 await getStoreActions().walletStore.login(data.nonce)
             } else {
                 actions.setAccount({ address: payload })
@@ -53,7 +51,6 @@ export const walletStore = {
     login: thunk(async (actions, payload, { getState }) => {
         const signedResult = await signMessage(payload)
         const data = await UserService.login(signedResult)
-        console.log('data', data);
 
         actions.setAccount({ ...getState().account, ...data })
     }),

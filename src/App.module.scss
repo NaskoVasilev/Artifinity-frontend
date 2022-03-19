@@ -1,3 +1,7 @@
+@import './sharedStyles/shared.module.scss';
+
 .App {
   height: 100%;
+  background-color: $secondary-color;
+  color: $text-color;
 }

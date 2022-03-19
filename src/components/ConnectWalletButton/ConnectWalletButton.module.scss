@@ -1,0 +1,15 @@
+.Box{
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+
+    svg{
+        width: 80px;
+        height: 80px;
+        margin-bottom: 15px;
+    }
+
+    &:hover{
+        background-color: lightgray;
+    }
+}

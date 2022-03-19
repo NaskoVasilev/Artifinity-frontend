@@ -1,0 +1,32 @@
+@import '../../sharedStyles/shared.module.scss';
+
+.Form {
+    width: 300px;
+
+    input,
+    input:focus {
+        box-shadow: none;
+        outline: none;
+        border-color: $tertiary-color;
+    }
+
+    button {
+        background-color: $primary-color;
+        color: $tertiary-color;
+
+        &:focus,
+        &:focus,
+        &:active:focus {
+            outline: none;
+            box-shadow: none;
+            background-color: $primary-color;
+            color: $tertiary-color;
+        }
+
+        &:hover {
+            background-color: $muted-color;
+            color: $tertiary-color;
+        }
+    }
+
+}

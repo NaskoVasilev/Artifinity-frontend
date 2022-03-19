@@ -1,0 +1,59 @@
+.Page {
+    margin-top: 160px;
+    margin-bottom: 15%;
+
+    .ConnectBox {
+        text-align: center;
+        position: relative;
+
+        .Connection {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+
+            .ConnectionText {
+                text-align: start;
+                font-size: 17px;
+                font-weight: 500;
+
+                p {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .Page {
+        margin-bottom: 10px;
+
+        .ConnectBox {
+            margin-top: 30px;
+
+            .Connection {
+                .ConnectionText {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1190px) {
+    .Page .ConnectBox {
+        position: relative;
+        display: block;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Page {
+        margin-top: 0;
+
+        .ConnectBox {
+            margin-bottom: 30px;
+        }
+    }
+}

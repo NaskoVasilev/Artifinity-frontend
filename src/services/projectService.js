@@ -18,4 +18,4 @@ class ProjectService {
     }
 }
 
-export default UserService;
+export default ProjectService;

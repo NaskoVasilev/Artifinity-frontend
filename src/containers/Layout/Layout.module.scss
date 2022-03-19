@@ -1,0 +1,49 @@
+@import '../../sharedStyles/shared.module.scss';
+
+.Page {
+    height: 100%;
+
+    .Navigation {
+        background-color: $tertiary-color;
+        text-align: center;
+        padding: 10px;
+
+        a {
+            text-decoration: none;
+            color: $secondary-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: large;
+            margin: 20px 0;
+
+            span {
+                margin-left: 5px;
+            }
+        }
+
+        .Connect {
+            background-color: $primary-color;
+            width: fit-content;
+            padding: 10px 15px;
+            margin: 20px auto;
+            border-radius: 15px;
+        }
+    }
+
+    .Layout {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        padding-top: 50px;
+        // align-items: flex-start;
+        height: calc(100% - 60px);
+
+        // height: 100%;
+        width: 100%;
+        // display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

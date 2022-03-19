@@ -1,0 +1,23 @@
+.ConnectButton {
+    border: none;
+    font-size: large;
+    font-weight: bold;
+    padding: 6px 40px;
+    color: white;
+}
+
+.ConnectButtonSmall {
+    @extend .ConnectButton;
+}
+
+@media screen and (max-width: 992px) {
+    .ConnectButton {
+        font-size: 1.2rem;
+        padding: 6px 30px;
+    }
+
+    .ConnectButtonSmall {
+        font-size: 10px;
+        padding: 6px;
+    }
+}

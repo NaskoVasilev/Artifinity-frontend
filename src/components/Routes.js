@@ -2,26 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 // import { useStoreState } from 'easy-peasy';
 import { useLocation, useNavigate } from 'react-router';
+import { useStoreState } from 'easy-peasy';
+
 import Sign from '../containers/Sign/Sign';
 import Dashboard from '../containers/Dashboard/Dashboard';
+import Register from './SignUp/Register';
+import Spinner from './common/Spinner/Spinner';
 
 const RouteOptions = {
-  GO_TO_LOGIN: 'GO_TO_LOGIN',
-  GO_TO_DASHBOARD: 'GO_TO_DASHBOARD',
+  BECOME_CREATOR: 'BECOME_CREATOR',
+  NOT_CONNECTED: 'NOT_CONNECTED',
+  DASHBOARD: 'DASHBOARD',
 };
 
 const Router = (props) => {
   const [routerAction, setRouterAction] = useState(null);
 
+  const { isWalletConnected, account } = useStoreState((state) => state.walletStore);
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const defaultRoutes = (
-    <Routes>
-      <Route path="/login" exact element={<Sign />} />
+    <>
       <Route path="/" element={<Dashboard />} />
       <Route path="*" element={<Navigate to='/' />} />
-    </Routes>
+    </>
   )
 
   useEffect(() => {
@@ -36,23 +42,35 @@ const Router = (props) => {
 
   const resolveNavigationRoute = () => {
     switch (true) {
-      // different cases
+      case !isWalletConnected:
+        return RouteOptions.NOT_CONNECTED;
+      case isWalletConnected && !account.token:
+        return RouteOptions.BECOME_CREATOR;
       default:
-        return RouteOptions.GO_TO_DASHBOARD;
+        return RouteOptions.DASHBOARD;
     }
   };
 
   if (!routerAction) {
-    return ('loading...')
+    return (<Spinner />)
   }
 
   if (routerAction) {
     switch (routerAction) {
-      case RouteOptions.GO_TO_LOGIN:
-        // ... routes
-        return;
+      case RouteOptions.BECOME_CREATOR:
+        return <Routes>
+          <Route path="/register" exact element={<Register />} />
+          {defaultRoutes}
+        </Routes>
+      case RouteOptions.NOT_CONNECTED:
+        return <Routes>
+          <Route path="/login" exact element={<Sign />} />
+          {defaultRoutes}
+        </Routes>
       default:
-        return defaultRoutes;
+        return <Routes>
+          {defaultRoutes}
+        </Routes>
     }
   }
 }

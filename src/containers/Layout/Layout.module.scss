@@ -5,8 +5,13 @@
 
     .Navigation {
         background-color: $tertiary-color;
+        color: $text-color;
         text-align: center;
         padding: 10px;
+
+        h2 {
+            color: $primary-color;
+        }
 
         a {
             text-decoration: none;

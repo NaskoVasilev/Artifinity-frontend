@@ -13,6 +13,7 @@ export const MetamaskDaemon = () => {
     const {
         setWalletConnection,
         setWalletConnectionLoading,
+        register
     } = useStoreActions((actions) => actions.walletStore);
     const store = useStore();
 
@@ -52,9 +53,10 @@ export const MetamaskDaemon = () => {
             const isWalletConnected =
                 window?.ethereum?._state?.isConnected && web3Modal?.cachedProvider;
 
+            register(accounts[0]);
             setWalletConnection({
                 isWalletConnected: !!isWalletConnected,
-                account: accounts[0],
+                account: { address: accounts[0] },
             });
 
             return true;
@@ -63,6 +65,5 @@ export const MetamaskDaemon = () => {
         return false;
     }
 
-    setWalletConnectionLoading(false);
     return null;
 };

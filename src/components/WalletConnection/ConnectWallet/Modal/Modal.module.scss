@@ -1,9 +1,13 @@
+@import '../../../../sharedStyles/shared.module.scss';
+
 .ConnectButton {
     border: none;
     font-size: large;
     font-weight: bold;
     padding: 6px 40px;
-    color: white;
+    background-color: $primary-color;
+    color: $tertiary-color;
+    border-radius: 10px
 }
 
 .ConnectButtonSmall {

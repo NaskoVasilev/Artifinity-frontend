@@ -1,12 +1,11 @@
-@import '../../../shared/sharedStyles.module.scss';
+@import '../../../sharedStyles/shared.module.scss';
 
 .Button {
-    border: 1px solid $secondary-color;
-    color: $secondary-color;
-    float: right;
+    border: 1px solid $accent-color;
+    color: $accent-color;
     background-color: transparent;
-    font-weight: 700;
-    padding: 8px 42px;
+    padding: 10px 30px;
+    border-radius: 15px;
 }
 
 @media screen and(max-width: 375px) {

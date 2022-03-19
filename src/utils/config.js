@@ -4,3 +4,5 @@ export const NETWORKS = {
     STABLE: { networkId: '779', name: 'Stable' },
     DAILY: { networkId: '778', name: 'Daily' },
 }
+
+export const WALLET_CONNECT = 'walletconnect';

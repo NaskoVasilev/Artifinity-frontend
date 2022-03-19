@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toastHandler, TOAST_STATES } from '../helpers/toast';
 import store from '../store/index';
 import { RESPONSE_STATUS } from '../utils/status';
+
 export class RequestAPI {
     static get(endpoint) {
         this.auth()
@@ -15,6 +16,7 @@ export class RequestAPI {
     }
 
     static post(endpoint, body = undefined) {
+        this.auth()
         return axios.post(process.env.REACT_APP_API_ENDPOINT + endpoint, body ? { ...body } : {})
             .then(data => {
                 this.handleSuccess(data.data)
@@ -25,6 +27,7 @@ export class RequestAPI {
     }
 
     static put(endpoint, body = undefined) {
+        this.auth()
         return axios.put(process.env.REACT_APP_API_ENDPOINT + endpoint, body ? { ...body } : {})
             .then(data => {
                 this.handleSuccess(data.data)
@@ -35,6 +38,7 @@ export class RequestAPI {
     }
 
     static delete(endpoint) {
+        this.auth()
         return axios.delete(process.env.REACT_APP_API_ENDPOINT + endpoint)
             .then(data => {
                 this.handleSuccess(data.data)
@@ -51,7 +55,7 @@ export class RequestAPI {
     }
 
     static handleError(error) {
-        const data = error.response.data
+        const data = error.message
         this.userUnauthorized(data);
         this.genericError(data);
     }
@@ -69,7 +73,9 @@ export class RequestAPI {
     }
 
     static auth = () => {
-        const token = store.getState().userStore.account?.token
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        const token = store.getState().walletStore.account?.token
+        if (token) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
     }
 }

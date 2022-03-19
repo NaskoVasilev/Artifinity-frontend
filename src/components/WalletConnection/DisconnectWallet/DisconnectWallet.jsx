@@ -1,16 +1,11 @@
 import React from 'react';
-import { useStore } from 'easy-peasy';
 
 import classes from './DisconnectWallet.module.scss';
 import { getWeb3Modal } from '../../../utils/web3Utils';
-import { WALLET_CONNECT } from '../../../config/walletConnectConstants';
+import { WALLET_CONNECT } from '../../../utils/config';
 import Web3 from 'web3';
 
-const web3modal = getWeb3Modal();
-
 const DisconnectWallet = (props) => {
-    const store = useStore();
-
     const disconnectClickedHandler = async () => {
         const web3 = new Web3(Web3.givenProvider);
 
@@ -21,14 +16,14 @@ const DisconnectWallet = (props) => {
             localStorage.removeItem(WALLET_CONNECT);
         }
 
+        const web3modal = await getWeb3Modal();
         web3modal.clearCachedProvider();
-        await store.getActions().optionStore.resetOptions();
         window.location.reload();
     };
 
     return (
         <button className={classes.Button} onClick={disconnectClickedHandler}>
-            DISCONNECT
+            Disconnect
         </button>
     );
 };

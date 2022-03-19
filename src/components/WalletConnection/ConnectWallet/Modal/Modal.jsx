@@ -18,7 +18,7 @@ const ConnectWalletModal = (props) => {
     const [show, setShow] = useState(false);
     const [web3modal, setWeb3modal] = useState();
 
-    const { setWalletConnection } = useStoreActions(
+    const { setWalletConnection, register } = useStoreActions(
         (actions) => actions.walletStore
     );
 
@@ -63,9 +63,10 @@ const ConnectWalletModal = (props) => {
                     let selectedAddress = ethereum.selectedAddress
                         ? ethereum.selectedAddress
                         : ethereum.address;
+                    register(selectedAddress);
                     setWalletConnection({
                         isWalletConnected: true,
-                        account: selectedAddress,
+                        account: { address: selectedAddress },
                     });
                 })
                 .catch((err) => {

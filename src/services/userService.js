@@ -6,15 +6,20 @@ class UserService {
     }
 
     static register = (data) => {
-        return RequestAPI.post('/users/register')
+        return RequestAPI.post('/users/register', data)
     }
+
+    static getUserInfo = (address) => {
+        return RequestAPI.get(`/users/info?address=${address}`)
+    }
+
 
     static getProfile = () => {
         return RequestAPI.get('/users/profile')
     }
 
-    static setPersonalData = () => {
-        return RequestAPI.put('/users/profile')
+    static setPersonalData = (data) => {
+        return RequestAPI.put('/users/profile', data)
     }
 }
 

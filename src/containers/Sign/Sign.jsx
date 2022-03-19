@@ -4,15 +4,7 @@ import ConnectWallet from '../../components/WalletConnection/ConnectWallet/Conne
 import classes from './Sign.module.scss';
 
 const Sign = () => {
-    return (
-        <>
-            <div>
-                <ConnectWallet />
-            </div>
-            <div>
-            </div>
-        </>
-    )
+    return (<ConnectWallet />)
 }
 
 export default Sign;

@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
-import { useStoreRehydrated, useStoreActions } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 import Web3 from 'web3';
 
 import classes from './App.module.scss';
 import Routes from './components/Routes';
 import Layout from './containers/Layout/Layout';
 import { MetamaskDaemon } from './components/metamask/MetamaskDaemon';
-import { NETWORKS } from './utils/enums';
+import { NETWORKS } from './utils/config';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const { setNetwork, setAccount } = useStoreActions(
+  const { setNetwork, register } = useStoreActions(
     (actions) => actions.walletStore
   );
-
-  const isRehydrated = useStoreRehydrated();
 
   useEffect(() => {
     const checkNetwork = () => {
@@ -51,11 +49,10 @@ function App() {
     window.ethereum.request({ method: 'eth_requestAccounts' }).then(function (accounts) {
       window.ethereum.on('accountsChanged', (accounts) => {
         checkNetwork();
-        setAccount(accounts[0]);
+        register(accounts[0]);
       });
       window.ethereum.on('chainChanged', (chainId) => checkNetwork());
     });
-    const web3 = new Web3(Web3.givenProvider);
 
     if (document.readyState === 'complete') {
       checkNetwork();

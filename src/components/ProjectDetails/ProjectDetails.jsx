@@ -54,7 +54,6 @@ const ProjectDetails = (props) => {
         return <Spinner />
     }
 
-    // TODO fix styling, arrange elements
     return (<>
         <div className={classes.TitlesContainer}>
             <h1 className={classes.Heading}>{project.name}</h1>
@@ -79,11 +78,9 @@ const ProjectDetails = (props) => {
                 </p>
                 <ProgressBar className={classes.ProgressContainer} variant='warning' now={percentage} />
                 <p className='mt-2'>
-                    <a className={classes.Link}href={project.url}>Link to project</a>
+                    <a className={classes.Link} href={project.url}>Link to project</a>
                 </p>
                 <p>Total investment: {project.totalInvestment} MTK</p>
-                {/* TODO add value & price */}
-                {/* TODO add invest button */}
                 <Button className="fw-bold" variant="warning" onClick={() => setModalShow(true)}>
                     Invest
                 </Button>
@@ -94,9 +91,9 @@ const ProjectDetails = (props) => {
             <p>{project.owner.firstName} {project.owner.lastName}</p>
             <p>{project.owner.bio}</p>
             <p>
-                <a className={classes.Link}href={project.owner.portfolioUrl}>Read more</a>
+                <a className={classes.Link} href={project.owner.portfolioUrl}>Read more</a>
             </p>
-            
+
         </div>
 
         <Modal

@@ -4,46 +4,46 @@ body {
     background-color: $secondary-color !important;
 }
 
-.TitlesContainer{
-    display:block;
+.TitlesContainer {
+    display: block;
     align-items: left;
-    width:100%;
-    margin-left:5%;
+    width: 100%;
+    margin-left: 5%;
 }
 
-.Heading{
+.Heading {
     color: $primary-color;
 }
 
-.Link{
-    color:$text-color;
+.Link {
+    color: $text-color;
     font-weight: bold;
 }
 
 .Link:hover {
-    color:$primary-color;
+    color: $primary-color;
 }
 
-.Description{
+.Description {
     color: $text-color;
 }
 
-.Badges{
-    margin-top:5px;
+.Badges {
+    margin-top: 5px;
     margin-bottom: 20px;
-    
-    .Badge{
+
+    .Badge {
         color: $tertiary-color;
         margin-right: 10px;
     }
 
 }
 
-.Period{
+.Period {
     font-weight: bold;
 }
 
-.ProgressContainer > div {
+.ProgressContainer>div {
     color: $tertiary-color !important;
 }
 
@@ -59,11 +59,11 @@ body {
     margin-bottom: 20px;
 }
 
-.ArtistContainer > h3 {
+.ArtistContainer>h3 {
     color: $primary-color;
 }
 
-.ArtistContainer > p {
+.ArtistContainer>p {
     margin-bottom: 5px;
 }
 

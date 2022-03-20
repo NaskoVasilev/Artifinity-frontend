@@ -1,8 +1,9 @@
 import { Tab } from 'bootstrap';
 import React, { useEffect, useState } from 'react';
-import { Badge, Col, ProgressBar, Row, Tabs } from 'react-bootstrap';
+import { Badge, Col, Image, ProgressBar, Row, Tabs } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router';
 import ProjectService from '../../services/projectService';
+import Spinner from '../common/Spinner/Spinner';
 
 const ProjectDetails = (props) => {
     const [project, setProject] = useState();
@@ -24,7 +25,13 @@ const ProjectDetails = (props) => {
         setProject(data)
 
         const now = +(Date.now() / 1000).toFixed()
-        setPercentage((100 * (now - project.startDate) / (project.endDate - project.startDate)).toFixed())
+        const start = (new Date(data.createdOn).getTime() / 1000).toFixed()
+        const end = (new Date(data.endDate).getTime() / 1000).toFixed()
+        setPercentage((100 * (now - start) / (end - start)).toFixed())
+    }
+
+    if (!project) {
+        return <Spinner />
     }
 
     // TODO fix styling, arrange elements
@@ -41,11 +48,12 @@ const ProjectDetails = (props) => {
 
         <Row>
             <Col md={8}>
-                <img alt='project idea' src={project.imageUrl} />
+                <Image thumbnail alt='project idea' src={project.imageUrl} />
             </Col>
             <Col>
-                <p>{new Date(project.startDate).toLocaleString()} - {new Date(project.endDate).toLocaleString()}</p>
+                <p>{new Date(project.createdOn).toLocaleString()} - {new Date(project.endDate).toLocaleString()}</p>
                 <ProgressBar now={percentage} label={`${percentage}%`} />
+                <p>Link to project: {project.url}</p>
                 {/* TODO add value & price */}
                 {/* TODO add invest button */}
             </Col>
@@ -59,6 +67,7 @@ const ProjectDetails = (props) => {
                 {project.owner.firstName}
                 {project.owner.lastName}
                 {project.owner.bio}
+                {project.owner.portfolioUrl}
             </Tab>
         </Tabs>
     </>)

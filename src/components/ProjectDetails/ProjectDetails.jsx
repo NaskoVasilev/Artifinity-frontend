@@ -1,6 +1,6 @@
 import { Tab } from 'bootstrap';
 import React, { useEffect, useState } from 'react';
-import { Badge, Col, Image, ProgressBar, Row, Tabs } from 'react-bootstrap';
+import { Badge, Button, Col, Form, Image, Modal, ProgressBar, Row, Tabs } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router';
 import ProjectService from '../../services/projectService';
 import Spinner from '../common/Spinner/Spinner';
@@ -8,6 +8,7 @@ import Spinner from '../common/Spinner/Spinner';
 const ProjectDetails = (props) => {
     const [project, setProject] = useState();
     const [percentage, setPercentage] = useState(0);
+    const [modalShow, setModalShow] = useState(false);
 
     const location = useLocation()
     const navigate = useNavigate()
@@ -17,17 +18,21 @@ const ProjectDetails = (props) => {
     }, []);
 
     const loadData = async () => {
-        if (!location.state) {
+        if (!location.state.id) {
             navigate('/')
         }
+
         const data = await ProjectService.details(location.state.id)
-        console.log('data', data);
         setProject(data)
 
         const now = +(Date.now() / 1000).toFixed()
         const start = (new Date(data.createdOn).getTime() / 1000).toFixed()
         const end = (new Date(data.endDate).getTime() / 1000).toFixed()
         setPercentage((100 * (now - start) / (end - start)).toFixed())
+    }
+
+    const investHandler = async (e) => {
+        e.preventDefault()
     }
 
     if (!project) {
@@ -56,6 +61,9 @@ const ProjectDetails = (props) => {
                 <p>Link to project: {project.url}</p>
                 {/* TODO add value & price */}
                 {/* TODO add invest button */}
+                <Button variant="primary" onClick={() => setModalShow(true)}>
+                    Invest
+                </Button>
             </Col>
         </Row>
         <Tabs defaultActiveKey="investments" id="uncontrolled-tab-example" className="mb-3">
@@ -70,6 +78,32 @@ const ProjectDetails = (props) => {
                 {project.owner.portfolioUrl}
             </Tab>
         </Tabs>
+
+        <Modal
+            show={modalShow}
+            size="sm"
+            onHide={() => setModalShow(false)}
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Investment size
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form onSubmit={investHandler}>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Value</Form.Label>
+                        <Form.Control type="number" placeholder="Value" />
+                    </Form.Group>
+                    <Button type='submit'>Invest</Button>
+                </Form>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={() => setModalShow(false)}>Close</Button>
+            </Modal.Footer>
+        </Modal>
     </>)
 }
 

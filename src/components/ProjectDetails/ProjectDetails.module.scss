@@ -1,5 +1,8 @@
 @import '../../sharedStyles/shared.module.scss';
 
+body {
+    background-color: $secondary-color !important;
+}
 
 .TitlesContainer{
     display:block;
@@ -13,7 +16,12 @@
 }
 
 .Link{
-    color:$accent-color;
+    color:$text-color;
+    font-weight: bold;
+}
+
+.Link:hover {
+    color:$primary-color;
 }
 
 .Description{
@@ -35,3 +43,30 @@
     font-weight: bold;
 }
 
+.ProgressContainer > div {
+    color: $tertiary-color !important;
+}
+
+.InvestButton {
+    font-weight: bold;
+}
+
+.ArtistContainer {
+    text-align: left;
+    width: 100%;
+    color: $text-color;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.ArtistContainer > h3 {
+    color: $primary-color;
+}
+
+.ArtistContainer > p {
+    margin-bottom: 5px;
+}
+
+.ProgressContainer {
+    width: 90%;
+}

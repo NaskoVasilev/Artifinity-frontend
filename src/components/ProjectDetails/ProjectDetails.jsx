@@ -57,8 +57,8 @@ const ProjectDetails = (props) => {
     // TODO fix styling, arrange elements
     return (<>
         <div className={classes.TitlesContainer}>
-            <h1 className={classes.Heading}>{project.name}</h1><br />
-            <p className={classes.Description}>{project.description}</p><br />
+            <h1 className={classes.Heading}>{project.name}</h1>
+            <p className={classes.Description}>{project.description}</p>
             <div className={classes.Badges}>
                 {project.tags.map((tag, i) => {
                     return <Badge className={classes.Badge} pill bg="warning" key={i}>
@@ -74,26 +74,30 @@ const ProjectDetails = (props) => {
             </Col>
             <Col>
                 <p className={classes.Period}>{new Date(project.createdOn).toLocaleString()} - {new Date(project.endDate).toLocaleString()}</p>
-                <ProgressBar now={percentage} label={`${percentage}%`} />
-                <p><a className={classes.Link} href={project.url}>Link to project</a></p>
+                <p className='m-0 fw-bold'>
+                    Completed: {percentage}%
+                </p>
+                <ProgressBar className={classes.ProgressContainer} variant='warning' now={percentage} />
+                <p className='mt-2'>
+                    <a className={classes.Link}href={project.url}>Link to project</a>
+                </p>
                 <p>Total investment: {project.totalInvestment} MTK</p>
-                <Button variant="primary" onClick={() => setModalShow(true)}>
+                {/* TODO add value & price */}
+                {/* TODO add invest button */}
+                <Button className="fw-bold" variant="warning" onClick={() => setModalShow(true)}>
                     Invest
                 </Button>
             </Col>
         </Row>
-        <Tabs defaultActiveKey="investments" id="uncontrolled-tab-example" className="mb-3">
-            <Tab eventKey="investments" title="Investments">
-                {/* TODO add investments fetched from blockchain */}
-            </Tab>
-            <Tab eventKey="artist" title="Artist">
-                {/* TODO style tab */}
-                {project.owner.firstName}
-                {project.owner.lastName}
-                {project.owner.bio}
-                {project.owner.portfolioUrl}
-            </Tab>
-        </Tabs>
+        <div className={classes.ArtistContainer}>
+            <h3>About the author</h3>
+            <p>{project.owner.firstName} {project.owner.lastName}</p>
+            <p>{project.owner.bio}</p>
+            <p>
+                <a className={classes.Link}href={project.owner.portfolioUrl}>Read more</a>
+            </p>
+            
+        </div>
 
         <Modal
             show={modalShow}

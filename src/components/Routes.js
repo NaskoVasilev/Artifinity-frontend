@@ -10,6 +10,7 @@ import Register from './SignUp/Register';
 import Spinner from './common/Spinner/Spinner';
 import ProjectDetails from './ProjectDetails/ProjectDetails';
 import CreateProject from './CreateProject/CreateProject';
+import UserProjects from '../containers/UserProjects/UserProjects';
 
 const RouteOptions = {
   BECOME_CREATOR: 'BECOME_CREATOR',
@@ -71,6 +72,7 @@ const Router = (props) => {
       case RouteOptions.CREATOR:
         return <Routes>
           <Route path="/create" exact element={<CreateProject />} />
+          <Route path="/my/projects" exact element={<UserProjects />} />
           {defaultRoutes}
         </Routes>
       case RouteOptions.NOT_CONNECTED:

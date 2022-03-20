@@ -1,12 +1,11 @@
 @import '../../sharedStyles/shared.module.scss';
 
-
 .Card {
     border-radius: 10px !important;
     border-color: $text-color !important;
     background-color: $tertiary-color !important;
     height: 100%;
-
+    min-width: 200px !important;
 }
 
 .CardBody {

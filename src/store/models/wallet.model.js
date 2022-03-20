@@ -40,11 +40,12 @@ export const walletStore = {
     */
     register: thunk(async (actions, payload, { getState, getStoreActions }) => {
         if (!getState().isWalletConnected) {
+            actions.setAccount({ address: payload })
+        } else {
             const data = await UserService.getUserInfo(payload)
+            console.log('data', data);
             if (data) {
                 await getStoreActions().walletStore.login(data.nonce)
-            } else {
-                actions.setAccount({ address: payload })
             }
         }
     }),

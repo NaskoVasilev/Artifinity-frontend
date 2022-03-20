@@ -21,8 +21,6 @@ class BlockchainService {
     return provider.waitForTransaction(tx.hash)
       .then((data) => {
         const event = contract.interface.parseLog(data.logs[0])
-        toastHandler({ success: TOAST_STATES.SUCCESS, message: 'Created project successfully' })
-
         return event.args.id.toNumber();
       })
   }

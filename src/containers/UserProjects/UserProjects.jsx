@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router';
 
 import ProjectService from '../../services/projectService';
 import classes from './UserProjects.module.scss';
+import Spinner from '../../components/common/Spinner/Spinner';
 
-
-// TODO style cards (colors and curves) using {classes}
 const UserProjects = () => {
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState();
 
     const navigate = useNavigate()
 
@@ -23,6 +22,14 @@ const UserProjects = () => {
 
     const clickHandler = (id) => {
         navigate('/project/details', { state: { id } })
+    }
+
+    if (!projects) {
+        return <Spinner />
+    }
+
+    if (projects.length === 0) {
+        return (<h1 className={classes.Warning}>No projects yet</h1>)
     }
 
     return (

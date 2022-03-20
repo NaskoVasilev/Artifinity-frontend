@@ -106,8 +106,8 @@ const ProjectDetails = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      <div className={classes.InvestModal}>
 
-      <div className={classes.InvestModal} >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Investment size

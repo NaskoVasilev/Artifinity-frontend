@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router';
 import ProjectService from '../../services/projectService';
 import classes from './Dashboard.module.scss';
 
-
-// TODO style cards (colors and curves) using {classes}
 const Dashboard = () => {
     const [projects, setProjects] = useState([]);
 

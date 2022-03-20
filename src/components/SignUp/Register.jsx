@@ -1,6 +1,7 @@
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import BlockchainService from '../../services/blockchainService';
 import UserService from '../../services/userService';
 
 import classes from './Register.module.scss';

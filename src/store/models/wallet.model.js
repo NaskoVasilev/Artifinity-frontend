@@ -22,7 +22,9 @@ export const walletStore = {
             state.account = null;
             state.loading = true;
         } else {
-            state.account = payload.account;
+            const account = state.account?.address === payload.account?.address ? state.account : { address: payload.account?.address }
+
+            state.account = account;
             state.loading = false;
         }
     }),
@@ -41,9 +43,8 @@ export const walletStore = {
     register: thunk(async (actions, payload, { getState, getStoreActions }) => {
         if (!getState().isWalletConnected) {
             actions.setAccount({ address: payload })
-        } else {
+        } else if (!getState().account?.token) {
             const data = await UserService.getUserInfo(payload)
-            console.log('data', data);
             if (data) {
                 await getStoreActions().walletStore.login(data.nonce)
             }

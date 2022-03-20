@@ -1,7 +1,7 @@
 import { useStoreState } from 'easy-peasy';
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { CashStack, PersonBoundingBox, Wallet } from 'react-bootstrap-icons';
+import { CashStack, Kanban, PersonBoundingBox, Wallet } from 'react-bootstrap-icons';
 import { NavLink } from 'react-router-dom';
 import Header from '../../components/common/Header/Header';
 import DisconnectWallet from '../../components/WalletConnection/DisconnectWallet/DisconnectWallet';
@@ -26,6 +26,9 @@ const Layout = (props) => {
                 <NavLink to='/'><CashStack /> <span>Dashboard</span></NavLink>
                 {isWalletConnected && !account.token ?
                     <NavLink to='/register'><PersonBoundingBox /> <span>Become creator</span></NavLink>
+                    : null}
+                {isWalletConnected && account.token ?
+                    <NavLink to='/create'><Kanban /> <span>Create project</span></NavLink>
                     : null}
             </Col>
             <Col>

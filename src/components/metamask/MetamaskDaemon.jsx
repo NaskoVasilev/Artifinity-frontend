@@ -15,19 +15,11 @@ export const MetamaskDaemon = () => {
 
     useEffect(() => {
         setWalletConnectionLoading(true);
-        loadWeb3();
+        loadUser();
         // eslint-disable-next-line
     }, []);
 
-    async function loadWeb3() {
-        await loadUser();
-
-        // if (!userLoaded || !isWalletConnected) {
-        //     await store.persist.clear();
-        // }
-    }
-
-    async function loadUser() {
+    const loadUser = async () => {
         let provider = null;
         try {
             provider = await detectEthereumProvider();
@@ -47,7 +39,6 @@ export const MetamaskDaemon = () => {
         if (accounts[0]) {
             const isConnected =
                 window?.ethereum?._state?.isConnected && modal?.cachedProvider;
-
             setWalletConnection({
                 isWalletConnected: !!isConnected,
                 account: { address: accounts[0] },

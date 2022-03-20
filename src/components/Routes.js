@@ -9,10 +9,12 @@ import Dashboard from '../containers/Dashboard/Dashboard';
 import Register from './SignUp/Register';
 import Spinner from './common/Spinner/Spinner';
 import ProjectDetails from './ProjectDetails/ProjectDetails';
+import CreateProject from './CreateProject/CreateProject';
 
 const RouteOptions = {
   BECOME_CREATOR: 'BECOME_CREATOR',
   NOT_CONNECTED: 'NOT_CONNECTED',
+  CREATOR: 'CREATOR',
   DASHBOARD: 'DASHBOARD',
 };
 
@@ -48,6 +50,8 @@ const Router = (props) => {
         return RouteOptions.NOT_CONNECTED;
       case isWalletConnected && !account.token:
         return RouteOptions.BECOME_CREATOR;
+      case isWalletConnected && !!account.token:
+        return RouteOptions.CREATOR;
       default:
         return RouteOptions.DASHBOARD;
     }
@@ -62,6 +66,11 @@ const Router = (props) => {
       case RouteOptions.BECOME_CREATOR:
         return <Routes>
           <Route path="/register" exact element={<Register />} />
+          {defaultRoutes}
+        </Routes>
+      case RouteOptions.CREATOR:
+        return <Routes>
+          <Route path="/create" exact element={<CreateProject />} />
           {defaultRoutes}
         </Routes>
       case RouteOptions.NOT_CONNECTED:

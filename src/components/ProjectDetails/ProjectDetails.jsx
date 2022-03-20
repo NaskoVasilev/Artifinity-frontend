@@ -36,7 +36,7 @@ const ProjectDetails = (props) => {
         const end = (new Date(data.endDate).getTime() / 1000).toFixed()
         setPercentage((100 * (now - start) / (end - start)).toFixed())
 
-        const info = await BlockchainService.getProjectData(data.contractId, account.address)
+        const info = await BlockchainService.getProjectData(data.contractId)
         data.totalInvestment = ethers.utils.formatEther(ethers.BigNumber.from(info.totalInvestment))
         setProject(data)
     }

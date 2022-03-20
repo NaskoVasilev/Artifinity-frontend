@@ -8,6 +8,8 @@ class BlockchainService {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
     const contract = new ethers.Contract(process.env.REACT_APP_FUND_CONTRACT_ADDRESS, fundABI, provider.getSigner(address).connectUnchecked())
 
+    toastHandler({ message: 'Transaction is being mined' })
+
     const tx = await contract.newFunding(endTime).catch(err => {
       toastHandler({ success: TOAST_STATES.ERROR, message: err.message })
     });
@@ -36,6 +38,8 @@ class BlockchainService {
     let tx = await token.approve(contract.address, amount)
     await tx.wait()
 
+    toastHandler({ message: 'Transaction is being mined' })
+
     tx = await contract.invest(id, amount).catch(err => {
       toastHandler({ success: TOAST_STATES.ERROR, message: err.message })
     });
@@ -45,9 +49,9 @@ class BlockchainService {
     toastHandler({ success: TOAST_STATES.SUCCESS, message: 'Successful investment' })
   }
 
-  static getProjectData = async (id, address) => {
+  static getProjectData = async (id) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
-    const contract = new ethers.Contract(process.env.REACT_APP_FUND_CONTRACT_ADDRESS, fundABI, provider.getSigner(address).connectUnchecked())
+    const contract = new ethers.Contract(process.env.REACT_APP_FUND_CONTRACT_ADDRESS, fundABI, provider)
 
     return await contract.projects(id)
   }

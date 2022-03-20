@@ -1,0 +1,37 @@
+@import '../../sharedStyles/shared.module.scss';
+
+
+.TitlesContainer{
+    display:block;
+    align-items: left;
+    width:100%;
+    margin-left:5%;
+}
+
+.Heading{
+    color: $primary-color;
+}
+
+.Link{
+    color:$accent-color;
+}
+
+.Description{
+    color: $text-color;
+}
+
+.Badges{
+    margin-top:5px;
+    margin-bottom: 20px;
+    
+    .Badge{
+        color: $tertiary-color;
+        margin-right: 10px;
+    }
+
+}
+
+.Period{
+    font-weight: bold;
+}
+

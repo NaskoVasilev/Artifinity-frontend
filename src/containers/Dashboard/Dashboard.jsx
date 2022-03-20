@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Badge, Card, Col, Row } from 'react-bootstrap';
+import { Badge, Card, Col, Row, Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
 import ProjectService from '../../services/projectService';
@@ -28,19 +28,21 @@ const Dashboard = () => {
     return (<>
         <Row xs={1} md={2} className="g-4">
             {projects.map((project) => (
-                <Col key={project.id}>
-                    <Card onClick={() => clickHandler(project.id)}>
-                        <Card.Img variant="top" src={project.imageUrl} />
-                        <Card.Body>
-                            <Card.Title>{project.name}</Card.Title>
-                            <Card.Text>
+                <Col xs={6} md={4} className={classes.Column} key={project.id}>
+                    <Card  className={[classes.Card, classes.Zoom].join(' ')} onClick={() => clickHandler(project.id)}>
+                        <Image fluid className={classes.CardImage} variant="top" src={project.imageUrl} />
+                        <Card.Body className={classes.CardBody}>
+                            <Card.Title className={classes.CardTitle}>{project.name}</Card.Title>
+                            <Card.Text className={classes.CardText}>
                                 {project.description}
                             </Card.Text>
+                            <div class="badges">
                             {project.tags.map((tag, i) => {
-                                return <Badge pill bg="primary" key={i}>
+                                return <Badge pill bg="warning" key={i} className={classes.Badge}>
                                     {tag}
                                 </Badge>
                             })}
+                            </div>
                         </Card.Body>
                     </Card>
                 </Col>

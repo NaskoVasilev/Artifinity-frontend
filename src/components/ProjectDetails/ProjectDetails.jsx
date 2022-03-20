@@ -4,6 +4,8 @@ import { Badge, Button, Col, Form, Image, Modal, ProgressBar, Row, Tabs } from '
 import { useLocation, useNavigate } from 'react-router';
 import ProjectService from '../../services/projectService';
 import Spinner from '../common/Spinner/Spinner';
+import classes from './ProjectDetails.module.scss';
+
 
 const ProjectDetails = (props) => {
     const [project, setProject] = useState();
@@ -41,14 +43,16 @@ const ProjectDetails = (props) => {
 
     // TODO fix styling, arrange elements
     return (<>
-        <h1>{project.name}</h1>
-        <p>{project.description}</p>
-        <div>
-            {project.tags.map((tag, i) => {
-                return <Badge pill bg="primary" key={i}>
-                    {tag}
-                </Badge>
-            })}
+        <div className={classes.TitlesContainer}>
+            <h1 className={classes.Heading}>{project.name}</h1><br/>
+            <p className={classes.Description}>{project.description}</p><br/>
+            <div className={classes.Badges}>
+                {project.tags.map((tag, i) => {
+                    return <Badge className={classes.Badge} pill bg="warning" key={i}>
+                        {tag}
+                    </Badge>
+                })}
+            </div>
         </div>
 
         <Row>
@@ -56,9 +60,9 @@ const ProjectDetails = (props) => {
                 <Image thumbnail alt='project idea' src={project.imageUrl} />
             </Col>
             <Col>
-                <p>{new Date(project.createdOn).toLocaleString()} - {new Date(project.endDate).toLocaleString()}</p>
+                <p className={classes.Period}>{new Date(project.createdOn).toLocaleString()} - {new Date(project.endDate).toLocaleString()}</p>
                 <ProgressBar now={percentage} label={`${percentage}%`} />
-                <p>Link to project: {project.url}</p>
+                <p><a className={classes.Link}href={project.url}>Link to project</a></p>
                 {/* TODO add value & price */}
                 {/* TODO add invest button */}
                 <Button variant="primary" onClick={() => setModalShow(true)}>

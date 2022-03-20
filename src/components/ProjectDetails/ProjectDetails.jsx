@@ -43,6 +43,8 @@ const ProjectDetails = (props) => {
 
     const investHandler = async (e) => {
         e.preventDefault()
+        setModalShow(false)
+
         const amount = +e.target.elements.amount.value
         await BlockchainService.invest(project.contractId, amount, account.address)
         setProject({ ...project, totalInvestment: project.totalInvestment + amount })

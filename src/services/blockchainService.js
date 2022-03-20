@@ -40,10 +40,6 @@ class BlockchainService {
       toastHandler({ success: TOAST_STATES.ERROR, message: err.message })
     });
 
-    if (!tx) {
-      return
-    }
-
     await tx.wait()
 
     toastHandler({ success: TOAST_STATES.SUCCESS, message: 'Successful investment' })

@@ -4,6 +4,7 @@ import models from './models';
 const store = createStore(
     persist(models, {
         storage: 'localStorage',
+        allow: ['walletStore']
     }),
     {
         version: 1,

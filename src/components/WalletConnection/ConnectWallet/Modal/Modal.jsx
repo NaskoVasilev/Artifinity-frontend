@@ -63,11 +63,12 @@ const ConnectWalletModal = (props) => {
                     let selectedAddress = ethereum.selectedAddress
                         ? ethereum.selectedAddress
                         : ethereum.address;
-                    register(selectedAddress);
+
                     setWalletConnection({
                         isWalletConnected: true,
                         account: { address: selectedAddress },
                     });
+                    register(selectedAddress);
                 })
                 .catch((err) => {
                     console.log('CONNECT METAMASK FROM POP UP EXTENSION');
@@ -79,13 +80,19 @@ const ConnectWalletModal = (props) => {
         const provider = new WalletConnectProvider({
             infuraId: process.env.REACT_APP_INFURA_ID
         });
+        console.log('provider', provider);
         try {
             const accounts = await provider.enable();
-            provider.connector.connect();
+            console.log('accounts', accounts);
+            await provider.connector.connect();
             if (ethereum && provider.connected) {
-                await window?.web3?.setProvider(provider);
+                window.web3 = new Web3(provider);
             }
-            props.connectWallet(true, accounts[0]);
+
+            setWalletConnection({
+                isWalletConnected: true,
+                account: { address: accounts[0] },
+            });
         } catch (err) {
             return;
         }

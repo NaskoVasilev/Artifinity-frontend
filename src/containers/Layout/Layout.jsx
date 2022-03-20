@@ -1,6 +1,6 @@
 import { useStoreState } from 'easy-peasy';
 import React from 'react';
-import { AccordionButton, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { CashStack, PersonBoundingBox, Wallet } from 'react-bootstrap-icons';
 import { NavLink } from 'react-router-dom';
 import Header from '../../components/common/Header/Header';
@@ -10,7 +10,6 @@ import classes from './Layout.module.scss';
 
 const Layout = (props) => {
     const { isWalletConnected, account } = useStoreState((state) => state.walletStore);
-
     return (
         <Row className={classes.Page}>
             <Col xs='2' className={classes.Navigation}>

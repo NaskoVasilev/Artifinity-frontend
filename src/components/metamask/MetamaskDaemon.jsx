@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getWeb3Modal } from '../../utils/web3Utils';
 
 import detectEthereumProvider from '@metamask/detect-provider';
-import { useStore, useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 
 const { ethereum } = window;
 

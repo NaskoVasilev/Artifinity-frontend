@@ -80,10 +80,9 @@ const ConnectWalletModal = (props) => {
         const provider = new WalletConnectProvider({
             infuraId: process.env.REACT_APP_INFURA_ID
         });
-        console.log('provider', provider);
+
         try {
             const accounts = await provider.enable();
-            console.log('accounts', accounts);
             await provider.connector.connect();
             if (ethereum && provider.connected) {
                 window.web3 = new Web3(provider);
